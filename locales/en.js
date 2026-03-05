@@ -55,6 +55,7 @@ window.Locales.en = {
   team_title:    'Our Team',
   role_founder:   'Creative Director & Narrative',
   role_cofounder: 'Lead Developer',
+  role_game_designer: 'Game Designer',
   role_freelance: 'Freelance Contributors',
   member1_name: 'Yunus',
   member2_name: 'Görkem',

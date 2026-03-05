@@ -53,8 +53,9 @@ window.Locales.de = {
 
   team_tag:       'Die Menschen',
   team_title:     'Unser Team',
-  role_founder:   'Creative Director & Narrative',
-  role_cofounder: 'Lead Developer',
+  role_founder:   'Kreativer Direktor & Narrative',
+  role_cofounder: 'Leitender Entwickler',
+  role_game_designer: 'Spieldesigner',
   role_freelance: 'Freie Mitarbeiter',
   member1_name: 'Yunus',
   member2_name: 'G\u00f6rkem',
