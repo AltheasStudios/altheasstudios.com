@@ -1,0 +1,102 @@
+<section class="section contact-section" id="contact">
+  <div class="container">
+
+    <div class="section-header animate-item">
+      <span class="section-tag"  data-i18n="contact_tag">Say Hello</span>
+      <h2 class="section-title"  data-i18n="contact_title">Get In Touch</h2>
+      <div class="title-line-dec"></div>
+      <p class="section-subtitle" data-i18n="contact_subtitle">
+        Whether you're a publisher, a fellow developer, a journalist, or just a fan —
+        we'd love to hear from you.
+      </p>
+    </div>
+
+    <div class="contact-grid">
+
+      <!-- Contact info -->
+      <div class="contact-info animate-item">
+        <div class="contact-info-item">
+          <div class="contact-icon">&#9993;</div>
+          <div>
+            <span class="contact-label" data-i18n="contact_email_label">Email</span>
+            <a href="mailto:info@altheasstudios.com" class="contact-value">
+              info@altheasstudios.com
+            </a>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">&#128205;</div>
+          <div>
+            <span class="contact-label" data-i18n="contact_location_label">Location</span>
+            <span class="contact-value" data-i18n="contact_location">Kocaeli, Turkey</span>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">&#127918;</div>
+          <div>
+            <span class="contact-label" data-i18n="contact_press_label">Press &amp; Gamescom</span>
+            <a href="mailto:press@altheasstudios.com" class="contact-value">
+              press@altheasstudios.com
+            </a>
+          </div>
+        </div>
+        <div class="contact-socials">
+          <a href="https://x.com/altheasstudio" target="_blank" rel="noopener" class="social-chip">Twitter / X</a>
+          <a href="#" class="social-chip" style="display:none">Discord</a>
+          <a href="https://www.instagram.com/altheasstudios" target="_blank" rel="noopener" class="social-chip">Instagram</a>
+          <a href="https://www.tiktok.com/@altheasstudios" target="_blank" rel="noopener" class="social-chip">TikTok</a>
+          <a href="#" class="social-chip">LinkedIn</a>
+          <a href="#" class="social-chip">Steam</a>
+        </div>
+      </div>
+
+      <!-- Contact form -->
+      <form class="contact-form animate-item" id="contact-form" onsubmit="handleFormSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name" data-i18n="form_name">Name</label>
+            <input
+              type="text" id="name" name="name" required
+              placeholder="Your Name" data-i18n-ph="form_name_ph"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email" data-i18n="form_email">Email</label>
+            <input
+              type="email" id="email" name="email" required
+              placeholder="your@email.com"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="subject" data-i18n="form_subject">Subject</label>
+          <select id="subject" name="subject">
+            <option value=""         data-i18n="form_subject_select">Select a topic…</option>
+            <option value="business" data-i18n="form_subject_biz">Business / Partnership</option>
+            <option value="press"    data-i18n="form_subject_press">Press / Media</option>
+            <option value="gamescom" data-i18n="form_subject_gc">Gamescom / Events</option>
+            <option value="feedback" data-i18n="form_subject_feedback">Player Feedback</option>
+            <option value="other"    data-i18n="form_subject_other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message" data-i18n="form_message">Message</label>
+          <textarea
+            id="message" name="message" rows="5" required
+            placeholder="Tell us about your enquiry…" data-i18n-ph="form_message_ph"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full" data-i18n="form_send">
+          Send Message
+        </button>
+        <div class="form-success" id="form-success" data-i18n="form_success">
+          ✓ Message sent! We'll get back to you soon.
+        </div>
+      </form>
+
+    </div>
+  </div>
+</section>
