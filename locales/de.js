@@ -56,6 +56,7 @@ window.Locales.de = {
   role_founder:   'Kreativer Direktor & Narrative',
   role_cofounder: 'Leitender Entwickler',
   role_game_designer: 'Spieldesigner',
+  role_cofounder_designer: 'Leitender Entwickler & Spieldesigner',
   role_freelance: 'Freie Mitarbeiter',
   member1_name: 'Yunus',
   member2_name: 'G\u00f6rkem',

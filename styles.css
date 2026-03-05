@@ -59,14 +59,11 @@
   background: var(--white);
 }
 .loader-logo {
-  font-family: var(--font-heading);
-  font-size: 2rem;
-  font-weight: 900;
-  background: var(--gradient-brand);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   animation: logoPulse 1.2s ease-in-out infinite alternate;
+}
+.loader-logo img {
+  height: 80px;
+  width: auto;
 }
 @keyframes logoPulse {
   from { opacity: 0.3; transform: scale(0.95); }

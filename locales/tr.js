@@ -56,6 +56,7 @@ window.Locales.tr = {
   role_founder:   'Yaratıcı Direktör & Anlatı',
   role_cofounder: 'Baş Geliştirici',
   role_game_designer: 'Oyun Tasarımcısı',
+  role_cofounder_designer: 'Baş Geliştirici & Oyun Tasarımcısı',
   role_freelance: 'Freelance Katkıcılar',
   member1_name: 'Yunus',
   member2_name: 'Görkem',
