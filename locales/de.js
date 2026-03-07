@@ -43,6 +43,7 @@ window.Locales.de = {
   game1_genre:       '?? \u00b7 Demn\u00e4chst',
   game1_desc:        'Unser erster Titel ist derzeit in aktiver Entwicklung. Genre und Details werden bald bekannt gegeben.',
   game1_status:      'Aktive Entwicklung',
+  game1_details:     'Details ansehen',
 
   music_tag:          'Klangwelten',
   music_title:        'Originalmusik',

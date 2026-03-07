@@ -1,0 +1,520 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Under Review — Altheas Studios</title>
+  <meta name="description" content="Under Review — debut title from Altheas Studios. A 1980s bureaucratic thriller. In active development." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green-bright: #00ff41;
+      --green-mid:    #00cc33;
+      --green-dark:   #007a1e;
+      --green-dim:    #004411;
+      --red-warn:     #ff5555;
+      --yellow-warn:  #ffbb00;
+      --bg:           #050a05;
+      --bg-surface:   #080f08;
+      --bg-card:      #0b140b;
+      --text-bright:  #c8ffc8;
+      --text-mid:     #6aaa6a;
+      --text-dim:     #2e5a2e;
+      --font-mono:    'Share Tech Mono', 'Courier New', monospace;
+      --font-heading: 'Orbitron', sans-serif;
+      --font-body:    'Inter', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--text-bright); overflow-x: hidden; min-height: 100vh; }
+    body::before { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.06) 2px,rgba(0,0,0,.06) 4px); pointer-events: none; z-index: 9000; }
+    body::after  { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.62) 100%); pointer-events: none; z-index: 8999; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    @keyframes blink        { 50%{opacity:0;} }
+    @keyframes pulseDot     { 0%,100%{transform:scale(1);opacity:1;} 50%{transform:scale(1.6);opacity:.4;} }
+    @keyframes logoFloat    { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+    @keyframes scrollBounce { 0%,100%{opacity:.4;transform:translateX(-50%) translateY(0);} 50%{opacity:1;transform:translateX(-50%) translateY(7px);} }
+    @keyframes scanFlicker  { 0%,100%{opacity:1;} 48%{opacity:1;} 50%{opacity:.96;} 52%{opacity:1;} }
+
+    .top-bar { position:fixed;top:0;left:0;right:0;z-index:500;height:54px;background:rgba(5,10,5,.93);border-bottom:1px solid rgba(0,255,65,.13);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px); }
+    .top-bar-inner { max-width:1100px;margin:0 auto;padding:0 28px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px; }
+    .back-btn { display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:.73rem;color:var(--text-mid);letter-spacing:1.5px;text-transform:uppercase;border:1px solid rgba(0,255,65,.2);padding:7px 14px;border-radius:3px;transition:color .2s,border-color .2s,background .2s;flex-shrink:0; }
+    .back-btn:hover { color:var(--green-bright);border-color:rgba(0,255,65,.55);background:rgba(0,255,65,.06); }
+    .top-bar-right { display:flex;align-items:center;gap:18px; }
+    .top-bar-sys { font-family:var(--font-mono);font-size:.65rem;color:var(--text-dim);letter-spacing:2px; }
+    .top-bar-sys .blink { color:var(--green-bright);animation:blink 1.3s step-end infinite; }
+    .lang-switch { display:flex;gap:4px;align-items:center; }
+    .lang-btn { font-family:var(--font-mono);font-size:.65rem;color:var(--text-dim);letter-spacing:1.5px;background:transparent;border:1px solid rgba(0,255,65,.12);padding:5px 9px;border-radius:3px;cursor:pointer;transition:color .2s,border-color .2s,background .2s;text-transform:uppercase; }
+    .lang-btn:hover  { color:var(--green-bright);border-color:rgba(0,255,65,.4); }
+    .lang-btn.active { color:var(--green-bright);border-color:rgba(0,255,65,.6);background:rgba(0,255,65,.09); }
+    @media(max-width:600px){.top-bar-sys{display:none;}}
+
+    .hero { min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:80px 28px 72px;position:relative;overflow:hidden; }
+    .hero::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse 90% 65% at 50% 42%,rgba(0,56,18,.38) 0%,transparent 68%),linear-gradient(180deg,#050a05 0%,#030603 100%); }
+    .hero::after  { content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,65,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,65,.03) 1px,transparent 1px);background-size:56px 56px; }
+    .hero-content { position:relative;z-index:1;text-align:center;max-width:860px;width:100%; }
+    .file-tag { display:inline-block;font-family:var(--font-mono);font-size:.66rem;color:var(--text-dim);letter-spacing:3.5px;text-transform:uppercase;margin-bottom:36px;border:1px solid var(--text-dim);padding:5px 16px;border-radius:2px; }
+    .hero-logo { width:min(500px,86%);margin:0 auto 36px;filter:drop-shadow(0 0 36px rgba(0,255,65,.35)) drop-shadow(0 0 80px rgba(0,255,65,.14));animation:logoFloat 5s ease-in-out infinite; }
+    .sys-label { font-family:var(--font-mono);font-size:.68rem;color:var(--text-dim);letter-spacing:4px;text-transform:uppercase;margin-bottom:28px; }
+    .hero-status { display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:.74rem;color:var(--green-bright);border:1px solid rgba(0,255,65,.35);background:rgba(0,255,65,.06);padding:10px 26px;border-radius:3px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:44px; }
+    .pulse-dot { width:8px;height:8px;background:var(--green-bright);border-radius:50%;box-shadow:0 0 8px var(--green-bright);animation:pulseDot 2.2s ease-in-out infinite; }
+    .hero-cta { display:flex;gap:14px;justify-content:center;flex-wrap:wrap; }
+    .btn-term { display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:.76rem;letter-spacing:2px;text-transform:uppercase;padding:12px 28px;border:1px solid rgba(0,255,65,.45);background:transparent;color:var(--green-bright);border-radius:3px;cursor:pointer;transition:background .22s,box-shadow .22s,border-color .22s; }
+    .btn-term:hover { background:rgba(0,255,65,.1);box-shadow:0 0 22px rgba(0,255,65,.22);border-color:rgba(0,255,65,.7); }
+    .btn-term.filled { background:rgba(0,255,65,.1);box-shadow:0 0 14px rgba(0,255,65,.18); }
+    .btn-term.filled:hover { background:rgba(0,255,65,.18);box-shadow:0 0 32px rgba(0,255,65,.32); }
+    .scroll-hint { position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:var(--font-mono);font-size:.59rem;color:var(--text-dim);letter-spacing:3px;animation:scrollBounce 2.2s ease-in-out infinite; }
+    .scroll-hint::after { content:'';width:1px;height:28px;background:linear-gradient(to bottom,var(--text-dim),transparent); }
+
+    .divider { text-align:center;font-family:var(--font-mono);font-size:.59rem;color:var(--text-dim);letter-spacing:5px;padding:10px 0;opacity:.5; }
+
+    .page-section { padding:92px 0; }
+    .sec-label { display:flex;align-items:center;gap:14px;font-family:var(--font-mono);font-size:.65rem;color:var(--text-dim);letter-spacing:4px;text-transform:uppercase;margin-bottom:14px; }
+    .sec-label::before { content:'';width:34px;height:1px;background:var(--text-dim);flex-shrink:0; }
+    .sec-label.centered { justify-content:center; }
+    .sec-label.centered::before { display:none; }
+    .sec-title { font-family:var(--font-heading);font-weight:700;line-height:1.2;font-size:clamp(1.5rem,3.6vw,2.55rem);color:var(--text-bright);margin-bottom:28px; }
+    .sec-title .accent { color:var(--green-bright); }
+    .sec-title.centered { text-align:center; }
+
+    .about-section { background:linear-gradient(180deg,var(--bg) 0%,var(--bg-surface) 100%);border-top:1px solid rgba(0,255,65,.07); }
+    .about-grid { display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center; }
+    .about-text { display:flex;flex-direction:column;gap:20px; }
+    .about-text p { color:var(--text-mid);font-size:.98rem;line-height:1.88; }
+    .tags { display:flex;gap:9px;flex-wrap:wrap;margin-top:6px; }
+    .tag { font-family:var(--font-mono);font-size:.67rem;color:var(--text-dim);border:1px solid rgba(0,255,65,.16);padding:5px 12px;border-radius:3px;letter-spacing:1px;text-transform:uppercase;background:rgba(0,255,65,.025); }
+    .tag.lit { color:var(--green-bright);border-color:rgba(0,255,65,.45);background:rgba(0,255,65,.07); }
+
+    /* ── Screenshot Carousel ── */
+    .carousel-wrap { display:flex;flex-direction:column;gap:16px;align-items:center; }
+    .carousel {
+      width:min(520px,100%);
+      aspect-ratio:16/9;
+      position:relative;
+      border-radius:8px;
+      overflow:hidden;
+      border:1px solid rgba(0,255,65,.18);
+      box-shadow:
+        0 0 0 1px rgba(0,255,65,.06),
+        0 24px 70px rgba(0,0,0,.85),
+        0 0 40px rgba(0,255,65,.06);
+      background:#000;
+    }
+    .carousel-track {
+      display:flex;
+      height:100%;
+      transition:transform .55s cubic-bezier(.4,0,.2,1);
+      will-change:transform;
+    }
+    .carousel-slide {
+      flex:0 0 100%;
+      width:100%;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .carousel-slide img {
+      width:100%;height:100%;display:block;
+      object-fit:cover;
+    }
+    /* Prev / Next arrows */
+    .carousel-btn {
+      position:absolute;top:50%;transform:translateY(-50%);
+      background:rgba(0,0,0,.55);border:1px solid rgba(0,255,65,.2);
+      color:var(--green-bright);font-family:var(--font-mono);font-size:1rem;
+      width:38px;height:38px;border-radius:4px;
+      display:flex;align-items:center;justify-content:center;
+      cursor:pointer;transition:background .2s,border-color .2s;
+      z-index:5;user-select:none;backdrop-filter:blur(4px);
+    }
+    .carousel-btn:hover { background:rgba(0,255,65,.12);border-color:rgba(0,255,65,.5); }
+    .carousel-btn.prev { left:10px; }
+    .carousel-btn.next { right:10px; }
+    /* Dot indicators */
+    .carousel-dots { display:flex;gap:8px;align-items:center;justify-content:center; }
+    .carousel-dot {
+      width:7px;height:7px;border-radius:50%;
+      background:var(--text-dim);
+      border:1px solid rgba(0,255,65,.15);
+      cursor:pointer;
+      transition:background .25s,box-shadow .25s,transform .25s;
+    }
+    .carousel-dot.active {
+      background:var(--green-bright);
+      box-shadow:0 0 8px rgba(0,255,65,.7);
+      transform:scale(1.25);
+    }
+    /* Counter label */
+    .carousel-counter {
+      font-family:var(--font-mono);font-size:.6rem;color:var(--text-dim);
+      letter-spacing:3px;
+    }
+
+    .features-section { background:var(--bg-surface);border-top:1px solid rgba(0,255,65,.07);border-bottom:1px solid rgba(0,255,65,.07); }
+    .features-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:18px; }
+    .feat-card { background:var(--bg-card);border:1px solid rgba(0,255,65,.1);border-radius:5px;padding:24px 20px;position:relative;overflow:hidden;transition:border-color .25s,box-shadow .25s; }
+    .feat-card:hover { border-color:rgba(0,255,65,.28);box-shadow:0 0 22px rgba(0,255,65,.06); }
+    .feat-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green-bright),transparent);opacity:.3; }
+    .feat-icon  { font-family:var(--font-mono);font-size:.72rem;color:var(--green-bright);letter-spacing:2px;margin-bottom:12px;opacity:.7; }
+    .feat-title { font-family:var(--font-heading);font-size:.82rem;font-weight:700;color:var(--text-bright);margin-bottom:9px;letter-spacing:.5px; }
+    .feat-desc  { font-size:.83rem;color:var(--text-mid);line-height:1.72; }
+
+    .status-section { background:var(--bg); }
+    .status-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:18px; }
+    .stat-card { background:var(--bg-card);border:1px solid rgba(0,255,65,.1);border-radius:5px;padding:24px 20px;position:relative;overflow:hidden;transition:border-color .25s,box-shadow .25s; }
+    .stat-card:hover { border-color:rgba(0,255,65,.28);box-shadow:0 0 22px rgba(0,255,65,.06); }
+    .stat-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green-bright),transparent);opacity:.35; }
+    .stat-label { font-family:var(--font-mono);font-size:.61rem;color:var(--text-dim);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px; }
+    .stat-value { font-family:var(--font-heading);font-size:1.02rem;font-weight:700;color:var(--text-bright);margin-bottom:5px; }
+    .stat-sub   { font-family:var(--font-mono);font-size:.67rem;color:var(--text-dim);letter-spacing:1px; }
+
+    .classified-section { background:var(--bg-surface);text-align:center; }
+    .clsf-box { max-width:700px;margin:0 auto;border:1px solid rgba(0,255,65,.17);border-radius:6px;padding:52px 48px;background:var(--bg-card);position:relative;overflow:hidden; }
+    .clsf-box::before { content:'CLASSIFIED';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-11deg);font-family:var(--font-heading);font-size:4.2rem;font-weight:900;color:rgba(180,40,40,.045);letter-spacing:8px;white-space:nowrap;pointer-events:none;user-select:none; }
+    .clsf-box::after { content:'';position:absolute;inset:0;border-radius:6px;box-shadow:inset 0 0 60px rgba(0,255,65,.022);pointer-events:none; }
+    .redact-line { font-family:var(--font-mono);font-size:.82rem;color:var(--text-mid);margin-bottom:14px;line-height:1.9; }
+    .redact { background:rgba(0,255,65,.13);color:transparent;border-radius:2px;padding:0 3px;user-select:none; }
+    .declassify-note { font-family:var(--font-mono);font-size:.65rem;color:var(--text-dim);letter-spacing:2.5px;text-transform:uppercase;margin-top:34px; }
+
+    .follow-section { background:linear-gradient(180deg,var(--bg-surface) 0%,var(--bg) 100%);border-top:1px solid rgba(0,255,65,.07);text-align:center; }
+    .follow-desc { color:var(--text-mid);max-width:480px;margin:0 auto 44px;font-size:.95rem;line-height:1.78; }
+    .social-links { display:flex;gap:12px;justify-content:center;flex-wrap:wrap; }
+    .social-link { display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:.72rem;color:var(--text-mid);border:1px solid rgba(0,255,65,.17);padding:12px 22px;border-radius:5px;letter-spacing:2px;text-transform:uppercase;background:var(--bg-card);transition:color .22s,border-color .22s,background .22s,transform .22s,box-shadow .22s; }
+    .social-link:hover { color:var(--green-bright);border-color:rgba(0,255,65,.5);background:rgba(0,255,65,.06);transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,255,65,.09); }
+    .social-link svg { flex-shrink:0; }
+
+    .page-footer { border-top:1px solid rgba(0,255,65,.08);padding:28px 0;text-align:center; }
+    .page-footer p { font-family:var(--font-mono);font-size:.63rem;color:var(--text-dim);letter-spacing:2px; }
+    .page-footer a { color:var(--text-dim);transition:color .2s; }
+    .page-footer a:hover { color:var(--green-bright); }
+
+    @media(max-width:820px) {
+      .about-grid    { grid-template-columns:1fr;gap:48px; }
+      .features-grid { grid-template-columns:1fr;gap:14px; }
+      .status-grid   { grid-template-columns:1fr;gap:14px; }
+      .clsf-box      { padding:36px 22px; }
+      .clsf-box::before { font-size:2.6rem; }
+    }
+    @media(max-width:480px) {
+      .btn-term { padding:11px 18px;font-size:.7rem; }
+      .alteros-balance { font-size:1.55rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="top-bar">
+    <div class="top-bar-inner">
+      <a href="../index.html" class="back-btn" data-i18n="back_btn">&#9664; Return to Base</a>
+      <div class="top-bar-right">
+        <div class="top-bar-sys">
+          AlterOS v.1984 // <span class="blink" data-i18n="sys_await">AWAITING INPUT</span>
+        </div>
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="tr">TR</button>
+          <button class="lang-btn" data-lang="de">DE</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="file-tag" data-i18n="file_tag">[ FILE ACCESSED — CASE #UR-2026-001 ]</div>
+      <img src="../assets/underReviewLogo.png" alt="Under Review" class="hero-logo">
+      <div class="sys-label">AlterOS v.1984 // AWAITING INPUT</div>
+      <div class="hero-status">
+        <span class="pulse-dot"></span>
+        <span data-i18n="hero_status">ACTIVE DEVELOPMENT</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#about" class="btn-term filled">&#9654;&nbsp;<span data-i18n="btn_access">Access File</span></a>
+        <a href="#follow" class="btn-term">&#11042;&nbsp;<span data-i18n="btn_follow">Follow Updates</span></a>
+      </div>
+    </div>
+    <div class="scroll-hint" data-i18n="scroll_hint">SCROLL DOWN</div>
+  </div>
+
+  <div class="divider">&#x2500; &#x2500; &#x2500; &#x25C8; &#x2500; &#x2500; &#x2500;</div>
+
+  <section class="page-section about-section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <div>
+            <div class="sec-label" data-i18n="about_db_label">Database Entry</div>
+            <h2 class="sec-title">
+              <span data-i18n="about_title_main">About the</span> <span class="accent" data-i18n="about_title_accent">Game</span>
+            </h2>
+          </div>
+          <p data-i18n="about_p1">It is 1984. You have just been assigned as a Human Resources officer at a government institution. Your duty: review incoming candidate files and decide who gets the job — and who does not.</p>
+          <p data-i18n="about_p2">But the files hold more than job applications. Rumors of an unidentified illness are beginning to surface through the institution's corridors. The pressure mounts, and every hiring decision carries far more weight than it should.</p>
+          <p data-i18n="about_p3">Inspect documents, cross-reference records, manage your budget and reputation. Under Review is a decision-driven game where bureaucracy, moral ambiguity and a rising mystery collide.</p>
+          <div class="tags">
+            <span class="tag lit" data-i18n="tag_dev">In Development</span>
+            <span class="tag lit" data-i18n="tag_debut">Debut Title</span>
+            <span class="tag" data-i18n="tag_genre">1980s · Bureaucracy Thriller</span>
+            <span class="tag" data-i18n="tag_platform">Platform: TBA</span>
+            <span class="tag" data-i18n="tag_release">Release: TBA</span>
+          </div>
+        </div>
+        <div class="carousel-wrap">
+          <div class="carousel" id="gameCarousel">
+            <div class="carousel-track" id="carouselTrack">
+              <div class="carousel-slide"><img src="../assets/inGameAsset/Scene_1.png" alt="Under Review — Scene 1" loading="lazy"></div>
+              <div class="carousel-slide"><img src="../assets/inGameAsset/Scene_2.png" alt="Under Review — Scene 2" loading="lazy"></div>
+              <div class="carousel-slide"><img src="../assets/inGameAsset/Scene_3.png" alt="Under Review — Scene 3" loading="lazy"></div>
+              <div class="carousel-slide"><img src="../assets/inGameAsset/Scene_4.png" alt="Under Review — Scene 4" loading="lazy"></div>
+              <div class="carousel-slide"><img src="../assets/inGameAsset/Scene_5.png" alt="Under Review — Scene 5" loading="lazy"></div>
+            </div>
+            <button class="carousel-btn prev" id="carouselPrev" aria-label="Previous">&#9664;</button>
+            <button class="carousel-btn next" id="carouselNext" aria-label="Next">&#9654;</button>
+          </div>
+          <div class="carousel-dots" id="carouselDots">
+            <div class="carousel-dot active" data-idx="0"></div>
+            <div class="carousel-dot" data-idx="1"></div>
+            <div class="carousel-dot" data-idx="2"></div>
+            <div class="carousel-dot" data-idx="3"></div>
+            <div class="carousel-dot" data-idx="4"></div>
+          </div>
+          <div class="carousel-counter" id="carouselCounter">01 / 05</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">&#x2500; &#x2500; &#x2500; &#x25C8; &#x2500; &#x2500; &#x2500;</div>
+
+  <section class="page-section features-section" id="features">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:52px;">
+        <div class="sec-label centered" data-i18n="features_label">Gameplay</div>
+        <h2 class="sec-title centered"><span data-i18n="features_title_main">Key</span> <span class="accent" data-i18n="features_title_accent">Features</span></h2>
+      </div>
+      <div class="features-grid">
+        <div class="feat-card"><div class="feat-icon">[ 01 ]</div><div class="feat-title" data-i18n="feat1_title">File Inspection</div><div class="feat-desc" data-i18n="feat1_desc">Review incoming candidate dossiers. Verify stamps, signatures and personal data against the rulebook. Every detail matters.</div></div>
+        <div class="feat-card"><div class="feat-icon">[ 02 ]</div><div class="feat-title" data-i18n="feat2_title">Budget Management</div><div class="feat-desc" data-i18n="feat2_desc">Earn your salary, collect bonuses for correct decisions — and pay the price for mistakes. Manage rent and stay financially afloat.</div></div>
+        <div class="feat-card"><div class="feat-icon">[ 03 ]</div><div class="feat-title" data-i18n="feat3_title">A Growing Mystery</div><div class="feat-desc" data-i18n="feat3_desc">Strange rumors begin circulating. An unidentified illness, unusual directives from above. Uncover what the institution is hiding.</div></div>
+        <div class="feat-card"><div class="feat-icon">[ 04 ]</div><div class="feat-title" data-i18n="feat4_title">Moral Decisions</div><div class="feat-desc" data-i18n="feat4_desc">Follow the rules or bend them. Every choice has consequences — not just for the candidates, but for you and the world around you.</div></div>
+        <div class="feat-card"><div class="feat-icon">[ 05 ]</div><div class="feat-title" data-i18n="feat5_title">1980s Atmosphere</div><div class="feat-desc" data-i18n="feat5_desc">A retro aesthetic brought to life through AlterOS — the era's bureaucratic computer system — dripping with cold institutional dread.</div></div>
+        <div class="feat-card"><div class="feat-icon">[ 06 ]</div><div class="feat-title" data-i18n="feat6_title">Multiple Endings</div><div class="feat-desc" data-i18n="feat6_desc">Your cumulative decisions shape the outcome. Will you uncover the truth — or become complicit in the very system you serve?</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">&#x2500; &#x2500; &#x2500; &#x25C8; &#x2500; &#x2500; &#x2500;</div>
+
+  <section class="page-section status-section" id="status">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:48px;">
+        <div class="sec-label centered" data-i18n="status_label">Development Status</div>
+        <h2 class="sec-title centered"><span data-i18n="status_title_main">Current</span> <span class="accent" data-i18n="status_title_accent">Readout</span></h2>
+      </div>
+      <div class="status-grid">
+        <div class="stat-card"><div class="stat-label" data-i18n="stat1_label">Project Status</div><div class="stat-value" data-i18n="stat1_val">In Development</div><div class="stat-sub" data-i18n="stat1_sub">Active · Ongoing</div></div>
+        <div class="stat-card"><div class="stat-label" data-i18n="stat2_label">Studio</div><div class="stat-value">Altheas Studios</div><div class="stat-sub" data-i18n="stat2_sub">Debut Title</div></div>
+        <div class="stat-card"><div class="stat-label" data-i18n="stat3_label">Release Window</div><div class="stat-value" data-i18n="stat3_val">TBA</div><div class="stat-sub" data-i18n="stat3_sub">To Be Announced</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">&#x2500; &#x2500; &#x2500; &#x25C8; &#x2500; &#x2500; &#x2500;</div>
+
+  <section class="page-section classified-section" id="intel">
+    <div class="container">
+      <div class="clsf-box">
+        <div class="sec-label centered" style="margin-bottom:26px;" data-i18n="intel_label">Intelligence Report</div>
+        <h2 class="sec-title centered" style="margin-bottom:36px;"><span data-i18n="intel_title_main">Something Is</span> <span class="accent" data-i18n="intel_title_accent">Being Watched</span></h2>
+        <div class="redact-line" data-i18n="redact1">Every decision leaves a trace. Every file has a <span class="redact">&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;</span> waiting to be found.</div>
+        <div class="redact-line" data-i18n="redact2">The year is 1984. You have been assigned to <span class="redact">&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;</span>.</div>
+        <div class="redact-line" data-i18n="redact3">Your tools: an AlterOS terminal, a rubber stamp, and <span class="redact">&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;</span>.</div>
+        <div class="redact-line" data-i18n="redact4">The illness has no name yet. And someone in the building <span class="redact">&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;</span>.</div>
+        <div class="declassify-note" data-i18n="intel_footer">— Full Intelligence Dossier · To Be Declassified Soon —</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">&#x2500; &#x2500; &#x2500; &#x25C8; &#x2500; &#x2500; &#x2500;</div>
+
+  <section class="page-section follow-section" id="follow">
+    <div class="container">
+      <div class="sec-label centered" style="margin-bottom:14px;" data-i18n="follow_label">Stay Connected</div>
+      <h2 class="sec-title centered"><span data-i18n="follow_title_main">Follow the</span> <span class="accent" data-i18n="follow_title_accent">Investigation</span></h2>
+      <p class="follow-desc" data-i18n="follow_desc">New intel will be transmitted soon. Follow Altheas Studios to receive updates as details are declassified.</p>
+      <div class="social-links">
+        <a href="https://x.com/altheasstudio" target="_blank" rel="noopener noreferrer" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.632L18.244 2.25zM17.1 19.77h1.833L7.084 4.126H5.117L17.1 19.77z"/></svg>Twitter / X</a>
+        <a href="https://www.instagram.com/altheasstudios" target="_blank" rel="noopener noreferrer" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Instagram</a>
+        <a href="https://www.tiktok.com/@altheasstudios" target="_blank" rel="noopener noreferrer" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.53V6.77a4.85 4.85 0 0 1-1.01-.08z"/></svg>TikTok</a>
+        <a href="mailto:press@altheasstudios.com" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span data-i18n="social_press">Press Contact</span></a>
+        <a href="../index.html" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span data-i18n="social_back">Back to Studio</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="page-footer">
+    <div class="container">
+      <p>&copy; 2026 <a href="../index.html">ALTHEAS STUDIOS</a> &mdash; CASE FILE UR-001 &mdash; ALL RIGHTS RESERVED</p>
+    </div>
+  </footer>
+
+  <script>
+  const UR_LOCALES = {
+    en: {
+      back_btn:'◀ Return to Base',sys_await:'AWAITING INPUT',
+      file_tag:'[ FILE ACCESSED — CASE #UR-2026-001 ]',
+      hero_status:'ACTIVE DEVELOPMENT',btn_access:'Access File',btn_follow:'Follow Updates',scroll_hint:'SCROLL DOWN',
+      about_db_label:'Database Entry',about_title_main:'About the',about_title_accent:'Game',
+      about_p1:"It is 1984. You have just been assigned as a Human Resources officer at a government institution. Your duty: review incoming candidate files and decide who gets the job — and who doesn't.",
+      about_p2:"But the files hold more than job applications. Rumors of an unidentified illness are beginning to surface through the institution's corridors. The pressure mounts, and every hiring decision carries far more weight than it should.",
+      about_p3:'Inspect documents, cross-reference records, manage your budget and reputation. Under Review is a decision-driven game where bureaucracy, moral ambiguity and a rising mystery collide.',
+      tag_dev:'In Development',tag_debut:'Debut Title',tag_genre:'1980s · Bureaucracy Thriller',tag_platform:'Platform: TBA',tag_release:'Release: TBA',
+      tab_jobs:'[ JOBS ]',tab_rules:'[ RULES ]',tab_calendar:'[ CALENDAR ]',tab_bank:'[ BANK ]',
+      balance_lbl:'BALANCE:',end_day:'[ END DAY ]',history_title:'--- ACCOUNT HISTORY ---',
+      entry_rent:'Rent',entry_bonus:'Bonus x2',entry_bonus_note:'Correct candidate archival bonus.',
+      entry_salary:'Salary',entry_penalty:'Penalty x1',entry_penalty_note:'Forged ID (Fake Stamp) candidate archived.',
+      features_label:'Gameplay',features_title_main:'Key',features_title_accent:'Features',
+      feat1_title:'File Inspection',feat1_desc:'Review incoming candidate dossiers. Verify stamps, signatures and personal data against the rulebook. Every detail matters.',
+      feat2_title:'Budget Management',feat2_desc:'Earn your salary, collect bonuses for correct decisions — and pay the price for mistakes. Manage rent and stay financially afloat.',
+      feat3_title:'A Growing Mystery',feat3_desc:'Strange rumors begin circulating. An unidentified illness, unusual directives from above. Uncover what the institution is hiding.',
+      feat4_title:'Moral Decisions',feat4_desc:'Follow the rules or bend them. Every choice has consequences — not just for the candidates, but for you and the world around you.',
+      feat5_title:'1980s Atmosphere',feat5_desc:"A retro aesthetic brought to life through AlterOS — the era's bureaucratic computer system — dripping with cold institutional dread.",
+      feat6_title:'Multiple Endings',feat6_desc:'Your cumulative decisions shape the outcome. Will you uncover the truth — or become complicit in the very system you serve?',
+      status_label:'Development Status',status_title_main:'Current',status_title_accent:'Readout',
+      stat1_label:'Project Status',stat1_val:'In Development',stat1_sub:'Active · Ongoing',
+      stat2_label:'Studio',stat2_sub:'Debut Title',
+      stat3_label:'Release Window',stat3_val:'TBA',stat3_sub:'To Be Announced',
+      intel_label:'Intelligence Report',intel_title_main:'Something Is',intel_title_accent:'Being Watched',
+      redact1:'Every decision leaves a trace. Every file has a <span class="redact">██████████████</span> waiting to be found.',
+      redact2:'The year is 1984. You have been assigned to <span class="redact">████████████████████████████</span>.',
+      redact3:'Your tools: an AlterOS terminal, a rubber stamp, and <span class="redact">█████████████████████████</span>.',
+      redact4:'The illness has no name yet. And someone in the building <span class="redact">████████████████████████</span>.',
+      intel_footer:'— Full Intelligence Dossier · To Be Declassified Soon —',
+      follow_label:'Stay Connected',follow_title_main:'Follow the',follow_title_accent:'Investigation',
+      follow_desc:'New intel will be transmitted soon. Follow Altheas Studios to receive updates as details are declassified.',
+      social_press:'Press Contact',social_back:'Back to Studio'
+    },
+    tr: {
+      back_btn:'◀ Ana Sayfaya Dön',sys_await:'GİRİŞ BEKLENİYOR',
+      file_tag:'[ DOSYAYA ERİŞİLDİ — VAKA #UR-2026-001 ]',
+      hero_status:'AKTİF GELİŞTİRME',btn_access:'Dosyaya Eriş',btn_follow:'Takip Et',scroll_hint:'AŞAĞI KAYDIR',
+      about_db_label:'Veritabanı Girişi',about_title_main:'Oyun',about_title_accent:'Hakkında',
+      about_p1:'1984 yılı. Bir devlet kurumunda İnsan Kaynakları memuru olarak göreve yeni başladınız. Göreviniz: gelen aday dosyalarını incelemek ve kimin işe alınacağına — kimin alınmayacağına — karar vermek.',
+      about_p2:"Ancak dosyalar basit iş başvurularından çok daha fazlasını barındırıyor. Kimliği henüz belirsiz bir hastalığa dair duyumlar kurumun koridorlarında yayılmaya başlıyor. Baskı artıyor ve her işe alım kararı olması gerekenden çok daha fazla anlam taşıyor.",
+      about_p3:'Belgeleri inceleyin, kayıtları çapraz kontrol edin, bütçenizi ve itibarınızı yönetin. Under Review; bürokrasinin, ahlaki belirsizliğin ve büyüyen bir gizemin çarpıştığı karar odaklı bir oyundur.',
+      tag_dev:'Geliştiriliyor',tag_debut:'İlk Oyun',tag_genre:'1980ler · Bürokrasi Gizemi',tag_platform:'Platform: TBA',tag_release:'Çıkış: TBA',
+      tab_jobs:'[ İŞLER ]',tab_rules:'[ KURALLAR ]',tab_calendar:'[ TAKVİM ]',tab_bank:'[ BANKA ]',
+      balance_lbl:'BAKİYE:',end_day:'[ GÜNÜ BİTİR ]',history_title:'--- HESAP GEÇMİŞİ ---',
+      entry_rent:'Kira',entry_bonus:'Prim x2',entry_bonus_note:'Doğru aday arşivleme primi.',
+      entry_salary:'Maaş',entry_penalty:'Ceza x1',entry_penalty_note:'Sahte (Kimlik Kartı: Sahte Damga) aday arşivlendi.',
+      features_label:'Mekanikler',features_title_main:'Öne Çıkan',features_title_accent:'Özellikler',
+      feat1_title:'Dosya İnceleme',feat1_desc:'Gelen aday dosyalarını inceleyin. Damgaları, imzaları ve kişisel bilgileri kural kitabıyla karşılaştırın. Her detay önemlidir.',
+      feat2_title:'Bütçe Yönetimi',feat2_desc:'Maaşınızı kazanın, doğru kararlar için prim alın — yanlışların bedelini ödeyin. Kiranızı yönetin, finansal olarak ayakta kalın.',
+      feat3_title:'Büyüyen Gizem',feat3_desc:'Tuhaf duyumlar yayılmaya başlıyor. Kimliği belirsiz bir hastalık, yukarıdan gelen alışılmadık direktifler. Kurumun sakladığı gerçeği bulun.',
+      feat4_title:'Ahlaki Kararlar',feat4_desc:'Kurallara uyun ya da onları zorlayın. Her tercihin sonuçları var — yalnızca adaylar için değil, sizin ve çevreniz için de.',
+      feat5_title:'1980ler Atmosferi',feat5_desc:'AlterOS aracılığıyla canlandırılmış el yapımı bir retro estetik — dönemin bürokratik bilgisayar sistemi soğuk kurumsal bir gerilimle damıtılıyor.',
+      feat6_title:'Çoklu Son',feat6_desc:'Birikimli kararlarınız sonucu şekillendirir. Gerçeği ortaya çıkaracak mısınız — yoksa hizmet ettiğiniz sistemin suç ortağı mı olacaksınız?',
+      status_label:'Geliştirme Durumu',status_title_main:'Güncel',status_title_accent:'Durum',
+      stat1_label:'Proje Durumu',stat1_val:'Geliştiriliyor',stat1_sub:'Aktif · Devam Ediyor',
+      stat2_label:'Stüdyo',stat2_sub:'İlk Oyun',
+      stat3_label:'Çıkış Tarihi',stat3_val:'TBA',stat3_sub:'Duyurulacak',
+      intel_label:'İstihbarat Raporu',intel_title_main:'Bir Şeyler',intel_title_accent:'Gözetleniyor',
+      redact1:'Her karar bir iz bırakır. Her dosyanın bulunmayı bekleyen bir <span class="redact">██████████████</span> var.',
+      redact2:'Yıl 1984. Bir devlet kurumunda <span class="redact">████████████████████████████</span> olarak görevlendirildiniz.',
+      redact3:'Araçlarınız: bir AlterOS terminali, bir kaşe ve <span class="redact">█████████████████████████</span>.',
+      redact4:'Hastalığın henüz bir adı yok. Ve binada biri <span class="redact">████████████████████████</span>.',
+      intel_footer:'— Tam İstihbarat Dosyası · Yakında Gizlilikten Çıkarılacak —',
+      follow_label:'Bağlantıda Kal',follow_title_main:'Soruşturmayı',follow_title_accent:'Takip Et',
+      follow_desc:"Yeni bilgiler yakında iletilecek. Detaylar gizlilikten çıkarıldıkça haberdar olmak için Altheas Studios'u takip edin.",
+      social_press:'Basın İletişim',social_back:'Stüdyoya Dön'
+    },
+    de: {
+      back_btn:'◀ Zurück zur Basis',sys_await:'EINGABE ERWARTET',
+      file_tag:'[ DATEI GEÖFFNET — FALL #UR-2026-001 ]',
+      hero_status:'IN AKTIVER ENTWICKLUNG',btn_access:'Datei Öffnen',btn_follow:'Updates Folgen',scroll_hint:'NACH UNTEN',
+      about_db_label:'Datenbankeintrag',about_title_main:'Über das',about_title_accent:'Spiel',
+      about_p1:'1984. Sie wurden als HR-Beamter bei einer Regierungsbehörde eingesetzt. Ihre Aufgabe: eingehende Bewerberdossiers prüfen und entscheiden, wer eingestellt wird — und wer nicht.',
+      about_p2:'Doch die Akten verbergen mehr als Bewerbungen. Gerüchte über eine unbekannte Krankheit beginnen durch die Korridore der Behörde zu wabern. Der Druck steigt, und jede Einstellungsentscheidung trägt weit mehr Gewicht als sie sollte.',
+      about_p3:'Dokumente prüfen, Akten abgleichen, Budget und Ruf verwalten. Under Review ist ein entscheidungsgetriebenes Spiel, in dem Bürokratie, moralische Ambiguität und ein wachsendes Mysterium aufeinanderprallen.',
+      tag_dev:'In Entwicklung',tag_debut:'Debut-Titel',tag_genre:'1980er · Bürokratie-Thriller',tag_platform:'Plattform: TBA',tag_release:'Release: TBA',
+      tab_jobs:'[ JOBS ]',tab_rules:'[ REGELN ]',tab_calendar:'[ KALENDER ]',tab_bank:'[ BANK ]',
+      balance_lbl:'GUTHABEN:',end_day:'[ TAG BEENDEN ]',history_title:'--- KONTOHISTORIE ---',
+      entry_rent:'Miete',entry_bonus:'Bonus x2',entry_bonus_note:'Korrekte Kandidatenarchivierung.',
+      entry_salary:'Gehalt',entry_penalty:'Strafe x1',entry_penalty_note:'Gefälschter Ausweis (Falscher Stempel) archiviert.',
+      features_label:'Gameplay',features_title_main:'Wichtige',features_title_accent:'Features',
+      feat1_title:'Aktenprüfung',feat1_desc:'Eingehende Bewerberdossiers prüfen. Stempel, Unterschriften und persönliche Daten gegen das Regelwerk abgleichen. Jedes Detail zählt.',
+      feat2_title:'Budgetverwaltung',feat2_desc:'Gehalt verdienen, Boni für korrekte Entscheidungen kassieren — und für Fehler bezahlen. Miete verwalten und finanziell über Wasser bleiben.',
+      feat3_title:'Ein Wachsendes Mysterium',feat3_desc:'Seltsame Gerüchte kursieren. Eine unbekannte Krankheit, ungewöhnliche Direktiven von oben. Lüften Sie, was die Behörde verbirgt.',
+      feat4_title:'Moralische Entscheidungen',feat4_desc:'Den Regeln folgen oder sie beugen. Jede Entscheidung hat Konsequenzen — nicht nur für die Kandidaten, sondern für Sie und Ihre Umgebung.',
+      feat5_title:'1980er Atmosphäre',feat5_desc:"Eine retro Ästhetik durch AlterOS — das bürokratische Computersystem der Ära — trieft vor kalter institutioneller Bedrohung.",
+      feat6_title:'Multiple Enden',feat6_desc:'Ihre kumulativen Entscheidungen formen das Ergebnis. Werden Sie die Wahrheit aufdecken — oder zum Komplizen des Systems werden, dem Sie dienen?',
+      status_label:'Entwicklungsstatus',status_title_main:'Aktueller',status_title_accent:'Stand',
+      stat1_label:'Projektstatus',stat1_val:'In Entwicklung',stat1_sub:'Aktiv · Laufend',
+      stat2_label:'Studio',stat2_sub:'Debut-Titel',
+      stat3_label:'Release-Fenster',stat3_val:'TBA',stat3_sub:'Wird Bekannt Gegeben',
+      intel_label:'Geheimdienstbericht',intel_title_main:'Etwas Wird',intel_title_accent:'Beobachtet',
+      redact1:'Jede Entscheidung hinterlässt Spuren. Jede Akte hat ein <span class="redact">██████████████</span>, das darauf wartet, gefunden zu werden.',
+      redact2:'Das Jahr ist 1984. Sie wurden <span class="redact">████████████████████████████</span> zugewiesen.',
+      redact3:'Ihre Werkzeuge: ein AlterOS-Terminal, ein Stempel und <span class="redact">█████████████████████████</span>.',
+      redact4:'Die Krankheit hat noch keinen Namen. Und jemand im Gebäude <span class="redact">████████████████████████</span>.',
+      intel_footer:'— Vollständiges Geheimdienstdossier · Demnächst Freigegeben —',
+      follow_label:'Vernetzt Bleiben',follow_title_main:'Der Ermittlung',follow_title_accent:'Folgen',
+      follow_desc:'Neue Informationen werden bald übermittelt. Folgen Sie Altheas Studios, um Updates zu erhalten, sobald Details freigegeben werden.',
+      social_press:'Pressekontakt',social_back:'Zur Studio'
+    }
+  };
+
+  let currentLang = 'en';
+  function applyLang(lang) {
+    if (!UR_LOCALES[lang]) return;
+    currentLang = lang;
+    const t = UR_LOCALES[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => applyLang(btn.dataset.lang)));
+    const bl = navigator.language.slice(0,2).toLowerCase();
+    applyLang(['tr','de'].includes(bl) ? bl : 'en');
+
+    // Carousel
+    const track   = document.getElementById('carouselTrack');
+    const dots    = document.querySelectorAll('.carousel-dot');
+    const counter = document.getElementById('carouselCounter');
+    const total   = 5;
+    let current   = 0;
+    let timer;
+
+    function goTo(n) {
+      current = (n + total) % total;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      counter.textContent = String(current + 1).padStart(2,'0') + ' / ' + String(total).padStart(2,'0');
+    }
+    function startAuto() {
+      clearInterval(timer);
+      timer = setInterval(() => goTo(current + 1), 3000);
+    }
+
+    document.getElementById('carouselPrev').addEventListener('click', () => { goTo(current - 1); startAuto(); });
+    document.getElementById('carouselNext').addEventListener('click', () => { goTo(current + 1); startAuto(); });
+    dots.forEach(d => d.addEventListener('click', () => { goTo(+d.dataset.idx); startAuto(); }));
+
+    // Pause on hover
+    document.getElementById('gameCarousel').addEventListener('mouseenter', () => clearInterval(timer));
+    document.getElementById('gameCarousel').addEventListener('mouseleave', startAuto);
+
+    startAuto();
+  });
+  </script>
+</body>
+</html>

@@ -43,6 +43,7 @@ window.Locales.en = {
   game1_genre:       '?? · Coming Soon',
   game1_desc:        'Our first title is currently in active development. Details and genre will be revealed soon — follow us to stay in the loop.',
   game1_status:      'Active Development',
+  game1_details:     'View Details',
 
   music_tag:          'Soundscapes',
   music_title:        'Original Music',

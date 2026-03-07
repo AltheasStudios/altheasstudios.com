@@ -1,5 +1,5 @@
 ﻿/* ════════════════════════════════════════════════════════════════
-   ALTHEA'S STUDIOS — script.js
+   ALTHEAS STUDIOS — script.js
    Architecture:
      1. fetch() loads each section from sections/*.html
      2. Fragments are injected into #app in order

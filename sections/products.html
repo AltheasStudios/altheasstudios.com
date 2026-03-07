@@ -11,10 +11,10 @@
     <div class="products-grid products-grid--single">
 
       <!-- Under Review — First title, in active development -->
-      <div class="product-card product-card--hero featured animate-item">
+      <div class="product-card product-card--hero featured animate-item" style="cursor:pointer;" onclick="window.location.href='games/under-review.html'">
         <div class="product-badge product-badge--dev" data-i18n="badge_dev">In Development</div>
         <div class="product-img product-img--hero">
-          <img src="assets/underRewievLogo.png" alt="Under Review" class="product-game-img">
+          <img src="assets/underReviewLogo.png" alt="Under Review" class="product-game-img">
         </div>
         <div class="product-info">
           <div class="product-meta">
@@ -30,6 +30,7 @@
             <span class="dev-dot"></span>
             <span data-i18n="game1_status">Active Development</span>
           </div>
+          <a href="games/under-review.html" class="btn btn-sm" style="margin-top:20px; align-self:flex-start;" onclick="event.stopPropagation()" data-i18n="game1_details">View Details</a>
         </div>
       </div>
 
