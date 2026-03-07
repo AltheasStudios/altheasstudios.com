@@ -68,7 +68,8 @@ async function assemblePage() {
    APP INIT — runs after all sections are in the DOM
    ════════════════════════════════════════════════════════════════ */
 function initApp() {
-  initI18n('en');
+  const savedLang = localStorage.getItem('ur_lang') || 'en';
+  initI18n(savedLang);
   initNavbar();
   initScrollAnimations();
   initCounters();
