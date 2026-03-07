@@ -98,6 +98,7 @@ function initI18n(lang) {
   });
 
   document.documentElement.lang = lang;
+  localStorage.setItem('ur_lang', lang);
 
   // Active lang button
   document.querySelectorAll('.lang-btn').forEach(btn => {
