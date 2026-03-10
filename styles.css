@@ -273,6 +273,7 @@ ul { list-style: none; }
   margin: 0 auto 12px;
   mix-blend-mode: multiply;
   filter: drop-shadow(0 4px 24px rgba(6,182,212,0.18));
+  margin-bottom: 40px;
 }
 .logo-box {
   width: 50px; height: 42px;
