@@ -40,7 +40,7 @@ window.Locales.tr = {
   products_title:    'Oyunlar & \u00dcr\u00fcnler',
   products_subtitle: 'Birinci oyunumuz \u015fu anda aktif geli\u015ftirme a\u015famas\u0131nda. Duyurular ve g\u00fcncellemeler i\u00e7in bizi takip edin.',
   badge_dev:         'Geli\u015ftiriliyor',
-  game1_genre:       '?? \u00b7 Yak\u0131nda',
+  game1_genre:       '2026 \u00b7 Yak\u0131nda',
   game1_desc:        'Birinci oyunumuz \u015fu an aktif olarak geli\u015ftiriliyor. T\u00fcr ve detaylar yak\u0131nda a\u00e7\u0131klanacak \u2014 haberdar olmak i\u00e7in bizi takip edin.',
   game1_status:      'Aktif Geli\u015ftirme',
   game1_details:     'Detaylar\u0131 G\u00f6r',
@@ -76,7 +76,7 @@ window.Locales.tr = {
   contact_email_label:    'E-posta',
   contact_location_label: 'Konum',
   contact_location:       'Kocaeli, T\u00fcrkiye',
-  contact_press_label:    'Basin & Gamescom',
+  contact_press_label:    'BASIN & Gamescom',
 
   form_name:            '\u0130sim',
   form_name_ph:         'Ad\u0131n\u0131z',

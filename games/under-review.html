@@ -61,9 +61,26 @@
     .file-tag { display:inline-block;font-family:var(--font-mono);font-size:.66rem;color:var(--text-dim);letter-spacing:3.5px;text-transform:uppercase;margin-bottom:36px;border:1px solid var(--text-dim);padding:5px 16px;border-radius:2px; }
     .hero-logo { width:min(500px,86%);margin:0 auto 36px;filter:drop-shadow(0 0 36px rgba(0,255,65,.35)) drop-shadow(0 0 80px rgba(0,255,65,.14));animation:logoFloat 5s ease-in-out infinite; }
     .sys-label { font-family:var(--font-mono);font-size:.68rem;color:var(--text-dim);letter-spacing:4px;text-transform:uppercase;margin-bottom:28px; }
-    .hero-status { display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:.74rem;color:var(--green-bright);border:1px solid rgba(0,255,65,.35);background:rgba(0,255,65,.06);padding:10px 26px;border-radius:3px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:44px; }
-    .pulse-dot { width:8px;height:8px;background:var(--green-bright);border-radius:50%;box-shadow:0 0 8px var(--green-bright);animation:pulseDot 2.2s ease-in-out infinite; }
-    .hero-cta { display:flex;gap:14px;justify-content:center;flex-wrap:wrap; }
+    .hero-status { display:inline-flex;align-items:center;justify-content:center;gap:14px;font-family:var(--font-mono);font-size:.74rem;color:var(--green-bright);border:1px solid rgba(0,255,65,.35);background:rgba(0,255,65,.06);padding:14px 30px;border-radius:3px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:24px;min-width:208px; }
+    .hero-status-link { text-decoration:none; transition:background .2s,border-color .2s,box-shadow .2s,transform .2s; }
+    .hero-status-link:hover { background:rgba(0,255,65,.12); border-color:rgba(0,255,65,.6); box-shadow:0 0 20px rgba(0,255,65,.2); transform:translateY(-1px); }
+    .pulse-steam {
+      width:12px;
+      height:12px;
+      flex-shrink:0;
+      background-color:var(--green-bright);
+      box-shadow:0 0 8px rgba(0,255,65,.65);
+      animation:pulseDot 3.2s ease-in-out infinite;
+      -webkit-mask-image:url('../assets/steam.svg');
+      -webkit-mask-repeat:no-repeat;
+      -webkit-mask-position:center;
+      -webkit-mask-size:contain;
+      mask-image:url('../assets/steam.svg');
+      mask-repeat:no-repeat;
+      mask-position:center;
+      mask-size:contain;
+    }
+    .hero-cta { display:flex;gap:24px;justify-content:center;flex-wrap:wrap; }
     .btn-term { display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:.76rem;letter-spacing:2px;text-transform:uppercase;padding:12px 28px;border:1px solid rgba(0,255,65,.45);background:transparent;color:var(--green-bright);border-radius:3px;cursor:pointer;transition:background .22s,box-shadow .22s,border-color .22s; }
     .btn-term:hover { background:rgba(0,255,65,.1);box-shadow:0 0 22px rgba(0,255,65,.22);border-color:rgba(0,255,65,.7); }
     .btn-term.filled { background:rgba(0,255,65,.1);box-shadow:0 0 14px rgba(0,255,65,.18); }
@@ -104,7 +121,10 @@
         0 24px 70px rgba(0,0,0,.85),
         0 0 40px rgba(0,255,65,.06);
       background:#000;
+      touch-action:pan-y;
+      cursor:grab;
     }
+    .carousel.dragging { cursor:grabbing; }
     .carousel-track {
       display:flex;
       height:100%;
@@ -122,6 +142,8 @@
     .carousel-slide img {
       width:100%;height:100%;display:block;
       object-fit:cover;
+      user-select:none;
+      -webkit-user-drag:none;
     }
     /* Prev / Next arrows */
     .carousel-btn {
@@ -188,6 +210,20 @@
     .social-link { display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:.72rem;color:var(--text-mid);border:1px solid rgba(0,255,65,.17);padding:12px 22px;border-radius:5px;letter-spacing:2px;text-transform:uppercase;background:var(--bg-card);transition:color .22s,border-color .22s,background .22s,transform .22s,box-shadow .22s; }
     .social-link:hover { color:var(--green-bright);border-color:rgba(0,255,65,.5);background:rgba(0,255,65,.06);transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,255,65,.09); }
     .social-link svg { flex-shrink:0; }
+    .social-link .steam-icon {
+      width:15px;
+      height:15px;
+      flex-shrink:0;
+      background-color:currentColor;
+      -webkit-mask-image:url('../assets/steam.svg');
+      -webkit-mask-repeat:no-repeat;
+      -webkit-mask-position:center;
+      -webkit-mask-size:contain;
+      mask-image:url('../assets/steam.svg');
+      mask-repeat:no-repeat;
+      mask-position:center;
+      mask-size:contain;
+    }
 
     .page-footer { border-top:1px solid rgba(0,255,65,.08);padding:28px 0;text-align:center; }
     .page-footer p { font-family:var(--font-mono);font-size:.63rem;color:var(--text-dim);letter-spacing:2px; }
@@ -229,11 +265,11 @@
     <div class="hero-content">
       <div class="file-tag" data-i18n="file_tag">[ FILE ACCESSED — CASE #UR-2026-001 ]</div>
       <img src="../assets/underReviewLogo.png" alt="Under Review" class="hero-logo">
-      <div class="sys-label">AlterOS v.1985 // AWAITING INPUT</div>
-      <div class="hero-status">
-        <span class="pulse-dot"></span>
+      <div class="sys-label">AlterOS v.1985 // <span data-i18n="sys_await">AWAITING INPUT</span></div>
+      <a href="https://store.steampowered.com/developer/altheas/" target="_blank" rel="noopener noreferrer" class="hero-status hero-status-link">
+        <span class="pulse-steam" aria-hidden="true"></span>
         <span data-i18n="hero_status">ACTIVE DEVELOPMENT</span>
-      </div>
+      </a>
       <div class="hero-cta">
         <a href="#about" class="btn-term filled">&#9654;&nbsp;<span data-i18n="btn_access">Access File</span></a>
         <a href="#follow" class="btn-term">&#11042;&nbsp;<span data-i18n="btn_follow">Follow Updates</span></a>
@@ -262,7 +298,7 @@
             <span class="tag lit" data-i18n="tag_debut">Debut Title</span>
             <span class="tag" data-i18n="tag_genre">1980s · Bureaucracy Thriller</span>
             <span class="tag" data-i18n="tag_platform">Platform: PC</span>
-            <span class="tag" data-i18n="tag_release">Release: TBA</span>
+            <span class="tag" data-i18n="tag_release">Release: 2026</span>
           </div>
         </div>
         <div class="carousel-wrap">
@@ -320,7 +356,7 @@
       <div class="status-grid">
         <div class="stat-card"><div class="stat-label" data-i18n="stat1_label">Project Status</div><div class="stat-value" data-i18n="stat1_val">In Development</div><div class="stat-sub" data-i18n="stat1_sub">Active · Ongoing</div></div>
         <div class="stat-card"><div class="stat-label" data-i18n="stat2_label">Studio</div><div class="stat-value">Altheas Studios</div><div class="stat-sub" data-i18n="stat2_sub">Debut Title</div></div>
-        <div class="stat-card"><div class="stat-label" data-i18n="stat3_label">Release Window</div><div class="stat-value" data-i18n="stat3_val">TBA</div><div class="stat-sub" data-i18n="stat3_sub">To Be Announced</div></div>
+        <div class="stat-card"><div class="stat-label" data-i18n="stat3_label">Release Window</div><div class="stat-value" data-i18n="stat3_val">2026</div><div class="stat-sub" data-i18n="stat3_sub">To Be Announced</div></div>
       </div>
     </div>
   </section>
@@ -352,6 +388,8 @@
         <a href="https://x.com/UnderReviewGame" target="_blank" rel="noopener noreferrer" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.632L18.244 2.25zM17.1 19.77h1.833L7.084 4.126H5.117L17.1 19.77z"/></svg>Twitter / X</a>
         <a href="https://www.instagram.com/underreviewgame/" target="_blank" rel="noopener noreferrer" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Instagram</a>
         <a href="https://www.tiktok.com/@underreviewgame" target="_blank" rel="noopener noreferrer" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.53V6.77a4.85 4.85 0 0 1-1.01-.08z"/></svg>TikTok</a>
+        <a href="https://www.youtube.com/@UnderReviewGame" target="_blank" rel="noopener noreferrer" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3.07 3.07 0 0 0-2.16-2.17C19.43 3.5 12 3.5 12 3.5s-7.43 0-9.34.53A3.07 3.07 0 0 0 .5 6.2 32.4 32.4 0 0 0 0 12a32.4 32.4 0 0 0 .5 5.8 3.07 3.07 0 0 0 2.16 2.17c1.91.53 9.34.53 9.34.53s7.43 0 9.34-.53a3.07 3.07 0 0 0 2.16-2.17A32.4 32.4 0 0 0 24 12a32.4 32.4 0 0 0-.5-5.8zM9.75 15.5v-7l6 3.5-6 3.5z"/></svg>YouTube</a>
+        <a href="https://store.steampowered.com/developer/altheas/" target="_blank" rel="noopener noreferrer" class="social-link"><span class="steam-icon" aria-hidden="true"></span>Steam</a>
         <a href="mailto:press@altheasstudios.com" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span data-i18n="social_press">Press Contact</span></a>
         <a href="../index.html" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span data-i18n="social_back">Back to Studio</span></a>
       </div>
@@ -360,7 +398,7 @@
 
   <footer class="page-footer">
     <div class="container">
-      <p>&copy; 2026 <a href="../index.html">ALTHEAS STUDIOS</a> &mdash; CASE FILE UR-001 &mdash; ALL RIGHTS RESERVED</p>
+      <p>&copy; 2026 <a href="../index.html">ALTHEAS STUDIOS</a> &mdash; <span data-i18n="footer_rights">CASE FILE UR-001 &mdash; ALL RIGHTS RESERVED</span></p>
     </div>
   </footer>
 
@@ -374,7 +412,7 @@
       about_p1:"It is 1985. You have just been assigned as a Human Resources officer at a government institution. Your duty: review incoming candidate files and decide who gets the job — and who doesn't.",
       about_p2:"But the files hold more than job applications. Rumors of an unidentified illness are beginning to surface through the institution's corridors. The pressure mounts, and every hiring decision carries far more weight than it should.",
       about_p3:'Inspect documents, cross-reference records, manage your budget and reputation. Under Review is a decision-driven game where bureaucracy, moral ambiguity and a rising mystery collide.',
-      tag_dev:'In Development',tag_debut:'Debut Title',tag_genre:'1980s · Bureaucracy Thriller',tag_platform:'Platform: PC',tag_release:'Release: TBA',
+      tag_dev:'In Development',tag_debut:'Debut Title',tag_genre:'1980s · Bureaucracy Thriller',tag_platform:'Platform: PC',tag_release:'Release: 2026',
       tab_jobs:'[ JOBS ]',tab_rules:'[ RULES ]',tab_calendar:'[ CALENDAR ]',tab_bank:'[ BANK ]',
       balance_lbl:'BALANCE:',end_day:'[ END DAY ]',history_title:'--- ACCOUNT HISTORY ---',
       entry_rent:'Rent',entry_bonus:'Bonus x2',entry_bonus_note:'Correct candidate archival bonus.',
@@ -389,7 +427,7 @@
       status_label:'Development Status',status_title_main:'Current',status_title_accent:'Readout',
       stat1_label:'Project Status',stat1_val:'In Development',stat1_sub:'Active · Ongoing',
       stat2_label:'Studio',stat2_sub:'Debut Title',
-      stat3_label:'Release Window',stat3_val:'TBA',stat3_sub:'To Be Announced',
+      stat3_label:'Release Window',stat3_val:'2026',stat3_sub:'To Be Announced',
       intel_label:'Intelligence Report',intel_title_main:'Something Is',intel_title_accent:'Being Watched',
       redact1:'Every decision leaves a trace. Every file has a <span class="redact">██████████████</span> waiting to be found.',
       redact2:'The year is 1985. You have been assigned to <span class="redact">████████████████████████████</span>.',
@@ -398,7 +436,8 @@
       intel_footer:'— Full Intelligence Dossier · To Be Declassified Soon —',
       follow_label:'Stay Connected',follow_title_main:'Follow the',follow_title_accent:'Investigation',
       follow_desc:'New intel will be transmitted soon. Follow Altheas Studios to receive updates as details are declassified.',
-      social_press:'Press Contact',social_back:'Back to Studio'
+      social_press:'Press Contact',social_back:'Back to Studio',
+      footer_rights:'CASE FILE UR-001 — ALL RIGHTS RESERVED'
     },
     tr: {
       back_btn:'◀ Ana Sayfaya Dön',sys_await:'GİRİŞ BEKLENİYOR',
@@ -408,7 +447,7 @@
       about_p1:'1985 yılı. Bir devlet kurumunda İnsan Kaynakları memuru olarak göreve yeni başladınız. Göreviniz: gelen aday dosyalarını incelemek ve kimin işe alınacağına — kimin alınmayacağına — karar vermek.',
       about_p2:"Ancak dosyalar basit iş başvurularından çok daha fazlasını barındırıyor. Kimliği henüz belirsiz bir hastalığa dair duyumlar kurumun koridorlarında yayılmaya başlıyor. Baskı artıyor ve her işe alım kararı olması gerekenden çok daha fazla anlam taşıyor.",
       about_p3:'Belgeleri inceleyin, kayıtları çapraz kontrol edin, bütçenizi ve itibarınızı yönetin. Under Review; bürokrasinin, ahlaki belirsizliğin ve büyüyen bir gizemin çarpıştığı karar odaklı bir oyundur.',
-      tag_dev:'Geliştiriliyor',tag_debut:'İlk Oyun',tag_genre:'1980ler · Bürokrasi Gizemi',tag_platform:'Platform: PC',tag_release:'Çıkış: TBA',
+      tag_dev:'Geliştiriliyor',tag_debut:'İlk Oyun',tag_genre:'1980ler · Bürokrasi Gizemi',tag_platform:'Platform: PC',tag_release:'Çıkış: 2026',
       tab_jobs:'[ İŞLER ]',tab_rules:'[ KURALLAR ]',tab_calendar:'[ TAKVİM ]',tab_bank:'[ BANKA ]',
       balance_lbl:'BAKİYE:',end_day:'[ GÜNÜ BİTİR ]',history_title:'--- HESAP GEÇMİŞİ ---',
       entry_rent:'Kira',entry_bonus:'Prim x2',entry_bonus_note:'Doğru aday arşivleme primi.',
@@ -423,7 +462,7 @@
       status_label:'Geliştirme Durumu',status_title_main:'Güncel',status_title_accent:'Durum',
       stat1_label:'Proje Durumu',stat1_val:'Geliştiriliyor',stat1_sub:'Aktif · Devam Ediyor',
       stat2_label:'Stüdyo',stat2_sub:'İlk Oyun',
-      stat3_label:'Çıkış Tarihi',stat3_val:'TBA',stat3_sub:'Duyurulacak',
+      stat3_label:'Çıkış Tarihi',stat3_val:'2026',stat3_sub:'Duyurulacak',
       intel_label:'İstihbarat Raporu',intel_title_main:'Bir Şeyler',intel_title_accent:'Gözetleniyor',
       redact1:'Her karar bir iz bırakır. Her dosyanın bulunmayı bekleyen bir <span class="redact">██████████████</span> var.',
       redact2:'Yıl 1985. Bir devlet kurumunda <span class="redact">████████████████████████████</span> olarak görevlendirildiniz.',
@@ -432,7 +471,8 @@
       intel_footer:'— Tam İstihbarat Dosyası · Yakında Gizlilikten Çıkarılacak —',
       follow_label:'Bağlantıda Kal',follow_title_main:'Soruşturmayı',follow_title_accent:'Takip Et',
       follow_desc:"Yeni bilgiler yakında iletilecek. Detaylar gizlilikten çıkarıldıkça haberdar olmak için Altheas Studios'u takip edin.",
-      social_press:'Basın İletişim',social_back:'Stüdyoya Dön'
+      social_press:'Basın İletişim',social_back:'Stüdyoya Dön',
+      footer_rights:'VAKA DOSYASI UR-001 — TÜM HAKLARI SAKLIDIR'
     },
     de: {
       back_btn:'◀ Zurück zur Basis',sys_await:'EINGABE ERWARTET',
@@ -442,7 +482,7 @@
       about_p1:'1985. Sie wurden als HR-Beamter bei einer Regierungsbehörde eingesetzt. Ihre Aufgabe: eingehende Bewerberdossiers prüfen und entscheiden, wer eingestellt wird — und wer nicht.',
       about_p2:'Doch die Akten verbergen mehr als Bewerbungen. Gerüchte über eine unbekannte Krankheit beginnen durch die Korridore der Behörde zu wabern. Der Druck steigt, und jede Einstellungsentscheidung trägt weit mehr Gewicht als sie sollte.',
       about_p3:'Dokumente prüfen, Akten abgleichen, Budget und Ruf verwalten. Under Review ist ein entscheidungsgetriebenes Spiel, in dem Bürokratie, moralische Ambiguität und ein wachsendes Mysterium aufeinanderprallen.',
-      tag_dev:'In Entwicklung',tag_debut:'Debut-Titel',tag_genre:'1980er · Bürokratie-Thriller',tag_platform:'Plattform: PC',tag_release:'Release: TBA',
+      tag_dev:'In Entwicklung',tag_debut:'Debut-Titel',tag_genre:'1980er · Bürokratie-Thriller',tag_platform:'Plattform: PC',tag_release:'Release: 2026',
       tab_jobs:'[ JOBS ]',tab_rules:'[ REGELN ]',tab_calendar:'[ KALENDER ]',tab_bank:'[ BANK ]',
       balance_lbl:'GUTHABEN:',end_day:'[ TAG BEENDEN ]',history_title:'--- KONTOHISTORIE ---',
       entry_rent:'Miete',entry_bonus:'Bonus x2',entry_bonus_note:'Korrekte Kandidatenarchivierung.',
@@ -457,7 +497,7 @@
       status_label:'Entwicklungsstatus',status_title_main:'Aktueller',status_title_accent:'Stand',
       stat1_label:'Projektstatus',stat1_val:'In Entwicklung',stat1_sub:'Aktiv · Laufend',
       stat2_label:'Studio',stat2_sub:'Debut-Titel',
-      stat3_label:'Release-Fenster',stat3_val:'TBA',stat3_sub:'Wird Bekannt Gegeben',
+      stat3_label:'Release-Fenster',stat3_val:'2026',stat3_sub:'Wird Bekannt Gegeben',
       intel_label:'Geheimdienstbericht',intel_title_main:'Etwas Wird',intel_title_accent:'Beobachtet',
       redact1:'Jede Entscheidung hinterlässt Spuren. Jede Akte hat ein <span class="redact">██████████████</span>, das darauf wartet, gefunden zu werden.',
       redact2:'Das Jahr ist 1985. Sie wurden <span class="redact">████████████████████████████</span> zugewiesen.',
@@ -466,7 +506,8 @@
       intel_footer:'— Vollständiges Geheimdienstdossier · Demnächst Freigegeben —',
       follow_label:'Vernetzt Bleiben',follow_title_main:'Der Ermittlung',follow_title_accent:'Folgen',
       follow_desc:'Neue Informationen werden bald übermittelt. Folgen Sie Altheas Studios, um Updates zu erhalten, sobald Details freigegeben werden.',
-      social_press:'Pressekontakt',social_back:'Zur Studio'
+      social_press:'Pressekontakt',social_back:'Zur Studio',
+      footer_rights:'FALLAKTE UR-001 — ALLE RECHTE VORBEHALTEN'
     }
   };
 
@@ -490,32 +531,168 @@
     applyLang(saved || (['tr','de'].includes(bl) ? bl : 'en'));
 
     // Carousel
+    const carousel = document.getElementById('gameCarousel');
     const track   = document.getElementById('carouselTrack');
     const dots    = document.querySelectorAll('.carousel-dot');
     const counter = document.getElementById('carouselCounter');
-    const total   = 5;
-    let current   = 0;
-    let timer;
+    const slides = Array.from(track.children);
+    const total  = slides.length;
+    const firstClone = slides[0].cloneNode(true);
+    const lastClone = slides[total - 1].cloneNode(true);
+    firstClone.setAttribute('aria-hidden', 'true');
+    lastClone.setAttribute('aria-hidden', 'true');
+    track.appendChild(firstClone);
+    track.insertBefore(lastClone, track.firstChild);
 
-    function goTo(n) {
-      current = (n + total) % total;
-      track.style.transform = `translateX(-${current * 100}%)`;
-      dots.forEach((d, i) => d.classList.toggle('active', i === current));
-      counter.textContent = String(current + 1).padStart(2,'0') + ' / ' + String(total).padStart(2,'0');
+    let current   = 0;
+    let position  = 1;
+    let timer;
+    let isAnimating = false;
+    let isDragging = false;
+    let startX = 0;
+    let deltaX = 0;
+    let dragPointerId = null;
+
+    function disableImageDrag() {
+      carousel.querySelectorAll('img').forEach((img) => {
+        img.setAttribute('draggable', 'false');
+        img.addEventListener('dragstart', (e) => e.preventDefault());
+      });
     }
+    disableImageDrag();
+
+    function updateUI() {
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    }
+
+    function setTrackPosition(animate, pixelOffset = 0) {
+      track.style.transition = animate ? 'transform .55s cubic-bezier(.4,0,.2,1)' : 'none';
+      if (pixelOffset !== 0) {
+        track.style.transform = `translateX(calc(${-position * 100}% + ${pixelOffset}px))`;
+      } else {
+        track.style.transform = `translateX(-${position * 100}%)`;
+      }
+    }
+
+    function updateDragPosition() {
+      setTrackPosition(false, deltaX);
+    }
+
+    function step(dir) {
+      if (isAnimating) return;
+      isAnimating = true;
+      position += dir;
+      current = (current + dir + total) % total;
+      updateUI();
+      setTrackPosition(true);
+    }
+
+    function goTo(index) {
+      const target = (index + total) % total;
+      if (target === current || isAnimating) return;
+      isAnimating = true;
+      current = target;
+      position = target + 1;
+      updateUI();
+      setTrackPosition(true);
+    }
+
+    function normalizeLoopBoundary() {
+      if (position === 0) {
+        position = total;
+        setTrackPosition(false);
+      } else if (position === total + 1) {
+        position = 1;
+        setTrackPosition(false);
+      }
+    }
+
     function startAuto() {
       clearInterval(timer);
-      timer = setInterval(() => goTo(current + 1), 3000);
+      timer = setInterval(() => step(1), 3000);
     }
 
-    document.getElementById('carouselPrev').addEventListener('click', () => { goTo(current - 1); startAuto(); });
-    document.getElementById('carouselNext').addEventListener('click', () => { goTo(current + 1); startAuto(); });
-    dots.forEach(d => d.addEventListener('click', () => { goTo(+d.dataset.idx); startAuto(); }));
+    function endDrag(shouldResumeAuto) {
+      if (!isDragging) return;
+      isDragging = false;
+      carousel.classList.remove('dragging');
+      track.style.transition = 'transform .55s cubic-bezier(.4,0,.2,1)';
+
+      const threshold = Math.max(45, carousel.clientWidth * 0.12);
+      if (Math.abs(deltaX) > threshold) {
+        step(deltaX < 0 ? 1 : -1);
+      } else {
+        setTrackPosition(true);
+      }
+
+      deltaX = 0;
+      dragPointerId = null;
+      if (shouldResumeAuto) startAuto();
+    }
+
+    track.addEventListener('transitionend', (e) => {
+      if (e.propertyName !== 'transform') return;
+      isAnimating = false;
+      normalizeLoopBoundary();
+    });
+
+    document.getElementById('carouselPrev').addEventListener('click', () => {
+      if (isAnimating || isDragging) return;
+      step(-1);
+      startAuto();
+    });
+    document.getElementById('carouselNext').addEventListener('click', () => {
+      if (isAnimating || isDragging) return;
+      step(1);
+      startAuto();
+    });
+    dots.forEach(d => d.addEventListener('click', () => {
+      if (isAnimating || isDragging) return;
+      goTo(+d.dataset.idx);
+      startAuto();
+    }));
+
+    carousel.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      if (e.target.closest('.carousel-btn')) return;
+      if (isAnimating) return;
+      isDragging = true;
+      dragPointerId = e.pointerId;
+      startX = e.clientX;
+      deltaX = 0;
+      track.style.transition = 'none';
+      carousel.classList.add('dragging');
+      clearInterval(timer);
+      carousel.setPointerCapture(e.pointerId);
+    });
+
+    carousel.addEventListener('pointermove', (e) => {
+      if (!isDragging || e.pointerId !== dragPointerId) return;
+      deltaX = e.clientX - startX;
+      updateDragPosition();
+    });
+
+    carousel.addEventListener('pointerup', (e) => {
+      if (e.pointerId !== dragPointerId) return;
+      endDrag(true);
+    });
+
+    carousel.addEventListener('pointercancel', (e) => {
+      if (e.pointerId !== dragPointerId) return;
+      endDrag(true);
+    });
+
+    carousel.addEventListener('lostpointercapture', () => {
+      endDrag(true);
+    });
 
     // Pause on hover
-    document.getElementById('gameCarousel').addEventListener('mouseenter', () => clearInterval(timer));
-    document.getElementById('gameCarousel').addEventListener('mouseleave', startAuto);
+    carousel.addEventListener('mouseenter', () => { if (!isDragging) clearInterval(timer); });
+    carousel.addEventListener('mouseleave', () => { if (!isDragging) startAuto(); });
 
+    updateUI();
+    setTrackPosition(false);
     startAuto();
   });
   </script>

@@ -40,7 +40,7 @@ window.Locales.de = {
   products_title:    'Spiele & Produkte',
   products_subtitle: 'Unser erster Titel befindet sich derzeit in aktiver Entwicklung. Folge uns f\u00fcr Ank\u00fcndigungen.',
   badge_dev:         'In Entwicklung',
-  game1_genre:       '?? \u00b7 Demn\u00e4chst',
+  game1_genre:       '2026 \u00b7 Demn\u00e4chst',
   game1_desc:        'Unser erster Titel ist derzeit in aktiver Entwicklung. Genre und Details werden bald bekannt gegeben.',
   game1_status:      'Aktive Entwicklung',
   game1_details:     'Details ansehen',
@@ -75,7 +75,7 @@ window.Locales.de = {
   contact_subtitle:       'Ob Publisher, Entwickler, Journalist oder einfach ein Fan \u2014 wir freuen uns von Ihnen zu h\u00f6ren.',
   contact_email_label:    'E-Mail',
   contact_location_label: 'Standort',
-  contact_location:       'Kocaeli, T\u00fcrkei',
+  contact_location:       'Kocaeli, T\u00fcrkiye',
   contact_press_label:    'Presse & Gamescom',
 
   form_name:            'Name',

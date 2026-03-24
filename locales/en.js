@@ -40,7 +40,7 @@ window.Locales.en = {
   products_title:    'Games & Products',
   products_subtitle: 'Our first title is currently in active development. Stay tuned for reveals and updates.',
   badge_dev:         'In Development',
-  game1_genre:       '?? · Coming Soon',
+  game1_genre:       '2026 · Coming Soon',
   game1_desc:        'Our first title is currently in active development. Details and genre will be revealed soon — follow us to stay in the loop.',
   game1_status:      'Active Development',
   game1_details:     'View Details',
@@ -75,7 +75,7 @@ window.Locales.en = {
   contact_subtitle:       "Whether you're a publisher, a fellow developer, a journalist, or just a fan \u2014 we'd love to hear from you.",
   contact_email_label:    'Email',
   contact_location_label: 'Location',
-  contact_location:       'Kocaeli, Turkey',
+  contact_location:       'Kocaeli, T\u00fcrkiye',
   contact_press_label:    'Press & Gamescom',
 
   form_name:            'Name',
