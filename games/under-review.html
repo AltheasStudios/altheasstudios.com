@@ -40,6 +40,7 @@
     @keyframes logoFloat    { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
     @keyframes scrollBounce { 0%,100%{opacity:.4;transform:translateX(-50%) translateY(0);} 50%{opacity:1;transform:translateX(-50%) translateY(7px);} }
     @keyframes scanFlicker  { 0%,100%{opacity:1;} 48%{opacity:1;} 50%{opacity:.96;} 52%{opacity:1;} }
+    @keyframes wishlistPulse { 0%,100%{ transform:translateY(0) scale(1); box-shadow:0 0 0 1px rgba(0,255,65,.42), 0 0 18px rgba(0,255,65,.22), 0 0 42px rgba(0,255,65,.12); } 50%{ transform:translateY(-1px) scale(1.02); box-shadow:0 0 0 1px rgba(0,255,65,.68), 0 0 24px rgba(0,255,65,.34), 0 0 60px rgba(0,255,65,.18); } }
 
     .top-bar { position:fixed;top:0;left:0;right:0;z-index:500;height:54px;background:rgba(5,10,5,.93);border-bottom:1px solid rgba(0,255,65,.13);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px); }
     .top-bar-inner { max-width:1100px;margin:0 auto;padding:0 28px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px; }
@@ -57,19 +58,38 @@
     .hero { min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:80px 28px 72px;position:relative;overflow:hidden; }
     .hero::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse 90% 65% at 50% 42%,rgba(0,56,18,.38) 0%,transparent 68%),linear-gradient(180deg,#050a05 0%,#030603 100%); }
     .hero::after  { content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,65,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,65,.03) 1px,transparent 1px);background-size:56px 56px; }
-    .hero-content { position:relative;z-index:1;text-align:center;max-width:860px;width:100%; }
+    .hero-content { position:relative;z-index:9100;text-align:center;max-width:860px;width:100%; }
     .file-tag { display:inline-block;font-family:var(--font-mono);font-size:.66rem;color:var(--text-dim);letter-spacing:3.5px;text-transform:uppercase;margin-bottom:36px;border:1px solid var(--text-dim);padding:5px 16px;border-radius:2px; }
-    .hero-logo { width:min(500px,86%);margin:0 auto 36px;filter:drop-shadow(0 0 36px rgba(0,255,65,.35)) drop-shadow(0 0 80px rgba(0,255,65,.14));animation:logoFloat 5s ease-in-out infinite; }
+    .hero-trailer {
+      width: min(720px, 92%);
+      aspect-ratio: 16 / 9;
+      margin: 0 auto 36px;
+      border: 1px solid rgba(0,255,65,.24);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(0,255,65,.12), 0 0 36px rgba(0,255,65,.24), 0 0 80px rgba(0,255,65,.12);
+      background: #000;
+      position: relative;
+      z-index: 9101;
+    }
+    .hero-trailer iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
     .sys-label { font-family:var(--font-mono);font-size:.68rem;color:var(--text-dim);letter-spacing:4px;text-transform:uppercase;margin-bottom:28px; }
-    .hero-status { display:inline-flex;align-items:center;justify-content:center;gap:14px;font-family:var(--font-mono);font-size:.74rem;color:var(--green-bright);border:1px solid rgba(0,255,65,.35);background:rgba(0,255,65,.06);padding:14px 30px;border-radius:3px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:24px;min-width:208px; }
-    .hero-status-link { text-decoration:none; transition:background .2s,border-color .2s,box-shadow .2s,transform .2s; }
-    .hero-status-link:hover { background:rgba(0,255,65,.12); border-color:rgba(0,255,65,.6); box-shadow:0 0 20px rgba(0,255,65,.2); transform:translateY(-1px); }
+    .hero-status { display:inline-flex;align-items:center;justify-content:center;gap:14px;position:relative;font-family:var(--font-mono);font-size:.78rem;color:#061006;border:1px solid rgba(0,255,65,.82);background:linear-gradient(135deg,#00ff41 0%,#00d93a 45%,#00b82f 100%);padding:15px 34px;border-radius:4px;letter-spacing:2.8px;text-transform:uppercase;margin-bottom:24px;min-width:232px;box-shadow:0 0 0 1px rgba(0,255,65,.34),0 0 20px rgba(0,255,65,.24),0 0 48px rgba(0,255,65,.14);animation:wishlistPulse 2s ease-in-out infinite; }
+    .hero-status::before { content:'';position:absolute;inset:-7px;border-radius:inherit;border:1px solid rgba(0,255,65,.22);pointer-events:none; }
+    .hero-status-link { text-decoration:none; transition:transform .2s, filter .2s; }
+    .hero-status-link:hover { transform:translateY(-2px) scale(1.02); filter:saturate(1.12) brightness(1.05); }
+    .hero-status-link:hover .pulse-steam { box-shadow:0 0 12px rgba(0,255,65,.8); }
     .pulse-steam {
       width:12px;
       height:12px;
       flex-shrink:0;
-      background-color:var(--green-bright);
-      box-shadow:0 0 8px rgba(0,255,65,.65);
+      background-color:#071107;
+      box-shadow:0 0 0 1px rgba(0,0,0,.28), 0 0 8px rgba(0,0,0,.22);
       animation:pulseDot 3.2s ease-in-out infinite;
       -webkit-mask-image:url('../assets/steam.svg');
       -webkit-mask-repeat:no-repeat;
@@ -264,11 +284,21 @@
   <div class="hero">
     <div class="hero-content">
       <div class="file-tag" data-i18n="file_tag">[ FILE ACCESSED — CASE #UR-2026-001 ]</div>
-      <img src="../assets/underReviewLogo.png" alt="Under Review" class="hero-logo">
+      <div class="hero-trailer" aria-label="Under Review Trailer">
+        <iframe
+          id="heroTrailerPlayer"
+          src="https://www.youtube.com/embed/p3gu5Hhqzn0?enablejsapi=1&autoplay=1&controls=1&playsinline=1&rel=0&modestbranding=1&fs=1&iv_load_policy=3"
+          title="Under Review Trailer"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
       <div class="sys-label">AlterOS v.1985 // <span data-i18n="sys_await">AWAITING INPUT</span></div>
-      <a href="https://store.steampowered.com/developer/altheas/" target="_blank" rel="noopener noreferrer" class="hero-status hero-status-link">
+      <a href="https://store.steampowered.com/app/4530500/Under_Review/" target="_blank" rel="noopener noreferrer" class="hero-status hero-status-link">
         <span class="pulse-steam" aria-hidden="true"></span>
-        <span data-i18n="hero_status">ACTIVE DEVELOPMENT</span>
+        <span data-i18n="hero_status">WISHLIST NOW</span>
       </a>
       <div class="hero-cta">
         <a href="#about" class="btn-term filled">&#9654;&nbsp;<span data-i18n="btn_access">Access File</span></a>
@@ -389,7 +419,7 @@
         <a href="https://www.instagram.com/underreviewgame/" target="_blank" rel="noopener noreferrer" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Instagram</a>
         <a href="https://www.tiktok.com/@underreviewgame" target="_blank" rel="noopener noreferrer" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.53V6.77a4.85 4.85 0 0 1-1.01-.08z"/></svg>TikTok</a>
         <a href="https://www.youtube.com/@UnderReviewGame" target="_blank" rel="noopener noreferrer" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3.07 3.07 0 0 0-2.16-2.17C19.43 3.5 12 3.5 12 3.5s-7.43 0-9.34.53A3.07 3.07 0 0 0 .5 6.2 32.4 32.4 0 0 0 0 12a32.4 32.4 0 0 0 .5 5.8 3.07 3.07 0 0 0 2.16 2.17c1.91.53 9.34.53 9.34.53s7.43 0 9.34-.53a3.07 3.07 0 0 0 2.16-2.17A32.4 32.4 0 0 0 24 12a32.4 32.4 0 0 0-.5-5.8zM9.75 15.5v-7l6 3.5-6 3.5z"/></svg>YouTube</a>
-        <a href="https://store.steampowered.com/developer/altheas/" target="_blank" rel="noopener noreferrer" class="social-link"><span class="steam-icon" aria-hidden="true"></span>Steam</a>
+        <a href="https://store.steampowered.com/app/4530500/Under_Review/" target="_blank" rel="noopener noreferrer" class="social-link"><span class="steam-icon" aria-hidden="true"></span>Steam</a>
         <a href="mailto:press@altheasstudios.com" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span data-i18n="social_press">Press Contact</span></a>
         <a href="../index.html" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span data-i18n="social_back">Back to Studio</span></a>
       </div>
@@ -407,7 +437,7 @@
     en: {
       back_btn:'◀ Return to Base',sys_await:'AWAITING INPUT',
       file_tag:'[ FILE ACCESSED — CASE #UR-2026-001 ]',
-      hero_status:'ACTIVE DEVELOPMENT',btn_access:'Access File',btn_follow:'Follow Updates',scroll_hint:'SCROLL DOWN',
+      hero_status:'WISHLIST NOW',btn_access:'Access File',btn_follow:'Follow Updates',scroll_hint:'SCROLL DOWN',
       about_db_label:'Database Entry',about_title_main:'About the',about_title_accent:'Game',
       about_p1:"It is 1985. You have just been assigned as a Human Resources officer at a government institution. Your duty: review incoming candidate files and decide who gets the job — and who doesn't.",
       about_p2:"But the files hold more than job applications. Rumors of an unidentified illness are beginning to surface through the institution's corridors. The pressure mounts, and every hiring decision carries far more weight than it should.",
@@ -442,7 +472,7 @@
     tr: {
       back_btn:'◀ Ana Sayfaya Dön',sys_await:'GİRİŞ BEKLENİYOR',
       file_tag:'[ DOSYAYA ERİŞİLDİ — VAKA #UR-2026-001 ]',
-      hero_status:'AKTİF GELİŞTİRME',btn_access:'Dosyaya Eriş',btn_follow:'Takip Et',scroll_hint:'AŞAĞI KAYDIR',
+      hero_status:'İSTEK LİSTESİNE EKLE',btn_access:'Dosyaya Eriş',btn_follow:'Takip Et',scroll_hint:'AŞAĞI KAYDIR',
       about_db_label:'Veritabanı Girişi',about_title_main:'Oyun',about_title_accent:'Hakkında',
       about_p1:'1985 yılı. Bir devlet kurumunda İnsan Kaynakları memuru olarak göreve yeni başladınız. Göreviniz: gelen aday dosyalarını incelemek ve kimin işe alınacağına — kimin alınmayacağına — karar vermek.',
       about_p2:"Ancak dosyalar basit iş başvurularından çok daha fazlasını barındırıyor. Kimliği henüz belirsiz bir hastalığa dair duyumlar kurumun koridorlarında yayılmaya başlıyor. Baskı artıyor ve her işe alım kararı olması gerekenden çok daha fazla anlam taşıyor.",
@@ -477,7 +507,7 @@
     de: {
       back_btn:'◀ Zurück zur Basis',sys_await:'EINGABE ERWARTET',
       file_tag:'[ DATEI GEÖFFNET — FALL #UR-2026-001 ]',
-      hero_status:'IN AKTIVER ENTWICKLUNG',btn_access:'Datei Öffnen',btn_follow:'Updates Folgen',scroll_hint:'NACH UNTEN',
+      hero_status:'JETZT AUF DIE WUNSCHLISTE',btn_access:'Datei Öffnen',btn_follow:'Updates Folgen',scroll_hint:'NACH UNTEN',
       about_db_label:'Datenbankeintrag',about_title_main:'Über das',about_title_accent:'Spiel',
       about_p1:'1985. Sie wurden als HR-Beamter bei einer Regierungsbehörde eingesetzt. Ihre Aufgabe: eingehende Bewerberdossiers prüfen und entscheiden, wer eingestellt wird — und wer nicht.',
       about_p2:'Doch die Akten verbergen mehr als Bewerbungen. Gerüchte über eine unbekannte Krankheit beginnen durch die Korridore der Behörde zu wabern. Der Druck steigt, und jede Einstellungsentscheidung trägt weit mehr Gewicht als sie sollte.',
@@ -524,11 +554,52 @@
     localStorage.setItem('ur_lang', lang);
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
   }
+
+  let ytApiReadyPromise;
+  function ensureYouTubeApiReady() {
+    if (window.YT && window.YT.Player) return Promise.resolve(window.YT);
+    if (ytApiReadyPromise) return ytApiReadyPromise;
+
+    ytApiReadyPromise = new Promise((resolve) => {
+      const previous = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = function() {
+        if (typeof previous === 'function') previous();
+        resolve(window.YT);
+      };
+
+      const existingScript = document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
+      if (!existingScript) {
+        const script = document.createElement('script');
+        script.src = 'https://www.youtube.com/iframe_api';
+        script.async = true;
+        document.head.appendChild(script);
+      }
+    });
+
+    return ytApiReadyPromise;
+  }
+
+  function initHeroTrailerPlayer() {
+    const trailer = document.getElementById('heroTrailerPlayer');
+    if (!trailer) return;
+
+    ensureYouTubeApiReady().then(() => {
+      new window.YT.Player('heroTrailerPlayer', {
+        events: {
+          onReady: (event) => {
+            event.target.setVolume(100);
+          }
+        }
+      });
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => applyLang(btn.dataset.lang)));
     const bl = navigator.language.slice(0,2).toLowerCase();
     const saved = localStorage.getItem('ur_lang');
     applyLang(saved || (['tr','de'].includes(bl) ? bl : 'en'));
+    initHeroTrailerPlayer();
 
     // Carousel
     const carousel = document.getElementById('gameCarousel');

@@ -44,6 +44,7 @@ window.Locales.de = {
   game1_desc:        'Unser erster Titel ist derzeit in aktiver Entwicklung. Genre und Details werden bald bekannt gegeben.',
   game1_status:      'Aktive Entwicklung',
   game1_details:     'Details ansehen',
+  game1_wishlist:    'Zur Wunschliste',
 
   music_tag:          'Klangwelten',
   music_title:        'Originalmusik',

@@ -14,7 +14,7 @@
       <div class="product-card product-card--hero featured animate-item" style="cursor:pointer;" onclick="window.location.href='games/under-review.html'">
         <div class="product-badge product-badge--dev" data-i18n="badge_dev">In Development</div>
         <div class="product-img product-img--hero">
-          <img src="assets/underReviewLogo.png" alt="Under Review" class="product-game-img">
+          <img src="assets/underReviewLogo.jpg" alt="Under Review" class="product-game-img">
         </div>
         <div class="product-info">
           <div class="product-meta">
@@ -29,7 +29,13 @@
             <span class="dev-dot"></span>
             <span data-i18n="game1_status">Active Development</span>
           </div>
-          <a href="games/under-review.html" class="btn btn-sm" style="margin-top:20px; align-self:flex-start;" onclick="event.stopPropagation()" data-i18n="game1_details">View Details</a>
+          <div class="product-actions">
+            <a href="games/under-review.html" class="btn btn-sm" onclick="event.stopPropagation()" data-i18n="game1_details">View Details</a>
+            <a href="https://store.steampowered.com/app/4530500/Under_Review/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-steam" onclick="event.stopPropagation()">
+              <span class="steam-icon" aria-hidden="true"></span>
+              <span data-i18n="game1_wishlist">Wishlist</span>
+            </a>
+          </div>
         </div>
       </div>
 

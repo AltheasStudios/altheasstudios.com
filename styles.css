@@ -157,6 +157,30 @@ ul { list-style: none; }
 .btn-sm:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(6,182,212,.45); }
 .btn-full { width: 100%; }
 
+.btn-steam {
+  background: #1b2838;
+  color: #d8e2ea;
+  box-shadow: 0 2px 12px rgba(27, 40, 56, 0.34);
+}
+.btn-steam:hover {
+  background: #2a475e;
+  box-shadow: 0 6px 20px rgba(42, 71, 94, 0.42);
+}
+.btn-steam .steam-icon {
+  width: 14px;
+  height: 14px;
+  display: block;
+  background-color: currentColor;
+  -webkit-mask-image: url('assets/steam.svg');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  mask-image: url('assets/steam.svg');
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+
 /* ─── Section commons ──────────────────────────────────────────── */
 .section { padding: 100px 0; position: relative; }
 .section:nth-of-type(odd) { background: var(--white); }
@@ -592,8 +616,6 @@ ul { list-style: none; }
   max-width: 560px;
   margin: 0 auto;
 }
-  gap: 28px;
-}
 .product-card {
   background: var(--white);
   border-radius: var(--radius-lg);
@@ -713,6 +735,20 @@ ul { list-style: none; }
 @keyframes devDot {
   0%,100% { opacity: 1; transform: scale(1); }
   50%      { opacity: 0.3; transform: scale(0.7); }
+}
+
+.product-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.product-actions .btn {
+  align-self: flex-start;
 }
 
 .product-info { padding: 20px 24px 24px; }

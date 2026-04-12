@@ -44,6 +44,7 @@ window.Locales.tr = {
   game1_desc:        'Birinci oyunumuz \u015fu an aktif olarak geli\u015ftiriliyor. T\u00fcr ve detaylar yak\u0131nda a\u00e7\u0131klanacak \u2014 haberdar olmak i\u00e7in bizi takip edin.',
   game1_status:      'Aktif Geli\u015ftirme',
   game1_details:     'Detaylar\u0131 G\u00f6r',
+  game1_wishlist:    '\u0130stek Listesi',
 
   music_tag:          'Ses D\u00fcnyas\u0131',
   music_title:        'Orijinal M\u00fczikler',
