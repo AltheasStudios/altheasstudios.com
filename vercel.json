@@ -1,0 +1,14 @@
+{
+    "redirects": [
+        {
+            "source": "/steam/under-review",
+            "destination": "https://store.steampowered.com/app/4530500/Under_Review/",
+            "permanent": true
+        },
+        {
+            "source": "/STEAM/UNDER-REVIEW",
+            "destination": "https://store.steampowered.com/app/4530500/Under_Review/",
+            "permanent": true
+        }
+    ]
+}
